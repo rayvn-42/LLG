@@ -1,0 +1,17 @@
+*.o
+*.a
+*.so
+*.out
+
+test_*
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+.DS_Store
+Thumbs.db
+
+*.txt
