@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g -I./include
 TFLAGS = $(CFLAGS) -I./tests -I./src
-LIBS = -lX11 -L. -lllg
+LIBS = -L. -lllg -lX11
 # Required object files
 OBJ = src/context.o \
 	  src/window.o \
