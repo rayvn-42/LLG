@@ -1,0 +1,10 @@
+prefix=@PREFIX@
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: LLG
+Description: Lightweight Linux Graphics Library based on X11
+Version: 0.1.0
+Libs: -L${libdir} -lllg -lX11
+Cflags: -I${includedir}

@@ -1,9 +1,10 @@
 # Vars
+# Compilation vars
 CC = gcc
 CFLAGS = -Wall -Wextra -g -I./include
 TFLAGS = $(CFLAGS) -I./tests -I./src
 LIBS = -lX11 -L. -lllg
-
+# Required object files
 OBJ = src/context.o \
 	  src/window.o \
 	  src/color.o \
@@ -12,8 +13,26 @@ OBJ = src/context.o \
 	  src/_error.o \
 	  src/_string.o \
 	  src/_utils.o
+# Install vars
+PREFIX = /usr/local
+INCLUDEDIR = $(PREFIX)/include
+LIBDIR = $(PREFIX)/lib
 
-all: libllg.a
+all: libllg.a llg.pc
+
+llg.pc: llg.pc.in
+	sed -e 's|@PREFIX@|$(PREFIX)|g' llg.pc.in > llg.pc
+
+install: libllg.a llg.pc
+	mkdir -p $(INCLUDEDIR) $(LIBDIR)/pkgconfig
+	cp -r include/LLG $(INCLUDEDIR)/
+	cp libllg.a $(LIBDIR)/libllg.a
+	cp llg.pc $(LIBDIR)/pkgconfig/llg.pc
+
+uninstall:
+	rm -rf $(INCLUDEDIR)/LLG
+	rm -f $(LIBDIR)/libllg.a
+	rm -f $(LIBDIR)/pkgconfig/llg.pc
 
 libllg.a: $(OBJ)
 	ar rcs libllg.a $(OBJ)
@@ -64,7 +83,7 @@ test_event: tests/test_event.c libllg.a
 .PHONY: all clean run
 
 clean:
-	rm -f src/*.o libllg.a test_*
+	rm -f src/*.o libllg.a test_* llg.pc
 
 run_main: test
 	./test_main

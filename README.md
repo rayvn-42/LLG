@@ -74,11 +74,11 @@ int main(void) {
 ## Features
 
 - Simple one-call window creation and lifecycle management
-- Double buffered rendering — no tearing, no flickering
-- Drawing primitives — pixels, lines, rectangles, circles, ellipses, polygons, arcs
+- Double buffered rendering - no tearing, no flickering
+- Drawing primitives - pixels, lines, rectangles, circles, ellipses, polygons, arcs
 - Fill and stroke draw state, similar to Processing / p5.js
 - Keyboard and mouse event handling with both polling and blocking modes
-- Live input state queries — `LLG_keyDown`, `LLG_mouseDown`, `LLG_mousePos`
+- Live input state queries - `LLG_keyDown`, `LLG_mouseDown`, `LLG_mousePos`
 - Delta time and FPS cap for frame-rate independent logic
 - Image loading and blitting
 - Text rendering via XLib fonts
@@ -96,10 +96,36 @@ int main(void) {
 | `libx11-dev` | X11 development headers |
 | Make | For the build system |
 
-Install X11 development headers on Debian/Ubuntu:
+Install X11 development headers on:
+
+### Debian/Ubuntu/Linux Mint:
 
 ```bash
-sudo apt install libx11-dev
+sudo apt install libx11-dev make git
+```
+
+### Fedora:
+
+```bash
+sudo dnf install libx11-devel make git
+```
+
+### CentOS/RHEL 7:
+
+```bash
+sudo yum install libx11-devel make git
+```
+
+### Arch Linux/Manjaro:
+
+```bash
+sudo pacman -S libx11 make git
+```
+
+### openSUSE:
+
+```bash
+sudo zypper install libx11-devel make git
 ```
 
 ---
@@ -109,32 +135,17 @@ sudo apt install libx11-dev
 Clone and build the static library:
 
 ```bash
-git clone https://github.com/yourname/llg.git
-cd llg
-make
+git clone https://github.com/rayvn-42/LLG.git
+cd LLG
+make install
 ```
 
-This produces `libllg.a` in the project root.
+This builds the library and copies headers to `/usr/local/include/LLG/` and the library to `/usr/local/lib/`.
 
-**Using LLG in your own project:**
-
+#### To include:
 ```bash
-gcc myapp.c -o myapp -I./include -L. -lllg -lX11
+gcc program.c -o program $(pkg-config --cflags --libs llg)
 ```
-
-Or with pkg-config once installed system-wide:
-
-```bash
-gcc myapp.c -o myapp $(pkg-config --cflags --libs llg)
-```
-
-**Installing system-wide (optional):**
-
-```bash
-sudo make install
-```
-
-This copies headers to `/usr/local/include/LLG/` and the library to `/usr/local/lib/`.
 
 ---
 
@@ -230,54 +241,6 @@ A passing basic test looks like this:
 | `LLG_getError()` | Get and clear the last error |
 | `LLG_clearError()` | Clear the error state |
 | `LLG_errorStr(err)` | Human-readable error description |
-
----
-
-## Project Structure
-
-```
-llg/
-├── include/
-│   └── LLG/            public headers — installed with the library
-│       ├── llg.h        umbrella header — users include this
-│       ├── types.h      shared types and structs
-│       ├── color.h      LLGColor, LLG_RGB, LLG_RGBA macros
-│       ├── draw.h       draw state and drawing functions
-│       ├── event.h      LLGEvent, event types
-│       ├── image.h      LLGImage, image functions
-│       ├── window.h     window property functions
-│       └── util.h       geometry helpers, time
-├── src/
-│   ├── context.c        lifecycle — init, destroy, quit, isRunning
-│   ├── window.c         window properties — title, resize, resizable
-│   ├── draw.c           drawing primitives
-│   ├── color.c          draw state — fill, stroke, background
-│   ├── frame.c          clear, present, fps cap, delta time
-│   ├── event.c          event polling and input state
-│   ├── image.c          image load, draw, destroy
-│   ├── text.c           font and text rendering
-│   ├── _error.c         internal error dispatch
-│   ├── _string.c        internal string utilities
-│   ├── _utils.c         internal helpers, XEvent translation
-│   └── internal.h       private structs, XLib includes
-├── tests/
-│   ├── test_utils.h     shared test macros (ASSERT, SECTION, SUMMARY)
-│   ├── test_main.c      basic test
-│   ├── test_context.c
-│   ├── test_window.c
-│   ├── test_color.c
-│   ├── test_frame.c
-│   └── test_event.c
-├── examples/
-│   └── hello_window.c
-├── docs/
-│   └── images/
-├── Makefile
-├── x2d.pc.in            pkg-config template
-├── CONTRIBUTING.md
-├── LICENSE
-└── README.md
-```
 
 ---
 
