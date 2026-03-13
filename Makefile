@@ -10,6 +10,7 @@ OBJ = src/context.o \
 	  src/color.o \
 	  src/event.o \
 	  src/frame.o \
+	  src/draw.o \
 	  src/_error.o \
 	  src/_string.o \
 	  src/_utils.o
@@ -60,6 +61,9 @@ src/event.o: src/event.c src/internal.h
 
 src/frame.o: src/frame.c src/internal.h
 	$(CC) $(CFLAGS) -c src/frame.c -o src/frame.o
+
+src/draw.o: src/draw.c src/internal.h
+	$(CC) $(CFLAGS) -c src/draw.c -o src/draw.o
 
 # compile test files
 test: tests/test_main.c libllg.a

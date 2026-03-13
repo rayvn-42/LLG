@@ -1,1 +1,1 @@
-# It stands for Low Level Graphics
+# It stands for Lightweight Linux Graphics
