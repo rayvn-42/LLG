@@ -20,10 +20,11 @@ typedef struct LLGContext LLGContext;
 #define LLG_CYAN LLG_RGB(0, 255, 255)
 #define LLG_MAGENTA LLG_RGB(255, 0, 255)
 
-void LLG_setColor(LLGContext *ctx, LLGColor color);
-void LLG_setFill(LLGContext *ctx, LLGColor color);
-void LLG_setStroke(LLGContext *ctx, LLGColor color);
-void LLG_noFill(LLGContext *ctx);
-void LLG_noStroke(LLGContext *ctx);
-void LLG_setStrokeWidth(LLGContext *ctx, int width);
-void LLG_setBackground(LLGContext *ctx, LLGColor color);
+LLGColor    LLG_colorLerp(LLGColor c1, LLGColor c2, float t);
+void        LLG_setColor(LLGContext *ctx, LLGColor color);
+void        LLG_setFill(LLGContext *ctx, LLGColor color);
+void        LLG_setStroke(LLGContext *ctx, LLGColor color);
+void        LLG_noFill(LLGContext *ctx);
+void        LLG_noStroke(LLGContext *ctx);
+void        LLG_setStrokeWidth(LLGContext *ctx, int width);
+void        LLG_setBackground(LLGContext *ctx, LLGColor color);

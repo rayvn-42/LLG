@@ -1,5 +1,17 @@
 #include "internal.h"
 
+LLGColor LLG_colorLerp(LLGColor c1, LLGColor c2, float t) {
+    t = t < 0.0f ? 0.0f : (t > 1.0f ? 1.0f : t);
+    LLGColor out;
+
+    out.r = (uint8_t)((float)c1.r + ((float)c2.r - (float)c1.r) * t);
+    out.g = (uint8_t)((float)c1.g + ((float)c2.g - (float)c1.g) * t);
+    out.b = (uint8_t)((float)c1.b + ((float)c2.b - (float)c1.b) * t);
+    out.a = (uint8_t)((float)c1.a + ((float)c2.a - (float)c1.a) * t);
+
+    return out;
+}
+
 void LLG_setColor(LLGContext *ctx, LLGColor color) {
     /*
         parameters:

@@ -246,7 +246,7 @@ A passing basic test looks like this:
 
 ## Contributing
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request — it covers branching, code style, commit message format, and the PR process.
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTION.md) before opening a pull request — it covers branching, code style, commit message format, and the PR process.
 
 ---
 

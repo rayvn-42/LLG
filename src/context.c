@@ -53,6 +53,9 @@ LLGContext *LLG_init(const char *title, int width, int height) {
     // handle GC and back buffer errors
     if (ctx->gc == NULL) {LLG__dispatchError(LLG_ERR_GC); XDestroyWindow(ctx->display, ctx->window); XCloseDisplay(ctx->display); free(ctx); return NULL;}
     if (ctx->backBuffer == None) {LLG__dispatchError(LLG_ERR_DRAWABLE); XFreeGC(ctx->display, ctx->gc); XDestroyWindow(ctx->display, ctx->window); XCloseDisplay(ctx->display); free(ctx); return NULL;}
+    ctx->font = XLoadQueryFont(ctx->display, "fixed");
+    if (ctx->font == NULL) {LLG__dispatchError(LLG_ERR_FONT); XFreePixmap(ctx->display, ctx->backBuffer); XFreeGC(ctx->display, ctx->gc); XDestroyWindow(ctx->display, ctx->window); XCloseDisplay(ctx->display); free(ctx); return NULL;}
+    XSetFont(ctx->display, ctx->gc, ctx->font->fid);
     // register the window manager delete window, so the X button works correctly (triggers event)
     Atom wm_delete_window = XInternAtom(ctx->display, "WM_DELETE_WINDOW", False);
     XSetWMProtocols(ctx->display, ctx->window, &wm_delete_window, 1);
@@ -92,6 +95,10 @@ void LLG_destroy(LLGContext *ctx) {
     
     // context NULL guard
     if (ctx == NULL) {LLG__dispatchError(LLG_ERR_BADARG); return;}
+    if (ctx->font != NULL) {
+        XFreeFont(ctx->display, ctx->font);
+        ctx->font = NULL;
+    }
     // free the back buffer pixel map
     XFreePixmap(ctx->display, ctx->backBuffer);
     // free the graphics context

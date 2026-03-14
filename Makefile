@@ -11,6 +11,7 @@ OBJ = src/context.o \
 	  src/event.o \
 	  src/frame.o \
 	  src/draw.o \
+	  src/text.o \
 	  src/_error.o \
 	  src/_string.o \
 	  src/_utils.o
@@ -65,6 +66,9 @@ src/frame.o: src/frame.c src/internal.h
 src/draw.o: src/draw.c src/internal.h
 	$(CC) $(CFLAGS) -c src/draw.c -o src/draw.o
 
+src/text.o: src/text.c src/internal.h
+	$(CC) $(CFLAGS) -c src/text.c -o src/text.o
+
 # compile test files
 test: tests/test_main.c libllg.a
 	$(CC) $(TFLAGS) tests/test_main.c -o test_main $(LIBS)
@@ -87,7 +91,7 @@ test_event: tests/test_event.c libllg.a
 .PHONY: all clean run
 
 clean:
-	rm -f src/*.o libllg.a test_* llg.pc
+	rm -f src/*.o libllg.a test_* llg.pc example_*
 
 run_main: test
 	./test_main

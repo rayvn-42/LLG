@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 #include "LLG/color.h"
 #include "LLG/draw.h"
@@ -34,6 +35,8 @@ const char *LLG__strCat(char *dest, size_t dest_size, char *m1, const char *m2);
 unsigned long LLG__colorToPixel(LLGContext *ctx, LLGColor color);
 
 int LLG__xEventToLLGEvent(LLGContext *ctx, XEvent xevent, LLGEvent *event);
+
+const char *LLG__resolveFont(char *name);
 
 struct LLGContext {
     // XLib core
@@ -69,6 +72,9 @@ struct LLGContext {
 
     // Double screen buffering
     Pixmap          backBuffer;
+
+    // Font
+    XFontStruct *font;
 
     // Draw state
     LLGColor        fgColor;

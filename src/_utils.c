@@ -84,3 +84,29 @@ int LLG__xEventToLLGEvent(LLGContext *ctx, XEvent xevent, LLGEvent *event) {
     }
     return 0;
 }
+
+typedef struct {
+    const char *alias;
+    const char *xlfd;
+} LLG__FontAlias;
+
+static LLG__FontAlias LLG__FontAliases[] = {
+    {"fixed", "fixed"},
+    {"mono-12", "-misc-fixed-medium-r-normal--12-*-*-*-*-*-*-*"},
+    {"mono-14", "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"},
+    {"mono-bold-14", "-misc-fixed-bold-r-normal--14-*-*-*-*-*-*-*"},
+    {"sans-12", "-adobe-helvetica-medium-r-normal--12-*-*-*-*-*-*-*"},
+    {"sans-14", "-adobe-helvetica-medium-r-normal--14-*-*-*-*-*-*-*"},
+    {"sans-bold-14", "-adobe-helvetica-bold-r-normal--14-*-*-*-*-*-*-*"},
+    {NULL, NULL}
+};
+
+const char *LLG__resolveFont(char *name) {
+    for (LLG__FontAlias *fa = LLG__FontAliases; fa->alias != NULL; fa++) {
+        if (strcmp(name, fa->alias)) {
+            return fa->xlfd;
+        }
+    }
+
+    return name;
+}
