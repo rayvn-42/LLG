@@ -1,10 +1,8 @@
 #include <LLG/llg.h>
 
 int main(void) {
-    LLGContext *ctx = LLG_init("LLG Example - draw", 800, 600);
+    LLGContext *ctx = LLG_init("My Window", 800, 600);
     LLGEvent ev;
-
-    LLGEllipse ellipse = (LLGEllipse){600, 100, 70, 40};
 
     LLG_setBackground(ctx, LLG_RGB(20, 20, 20));
     LLG_setFpsCap(ctx, 60);
@@ -18,9 +16,7 @@ int main(void) {
         LLG_setFill(ctx, LLG_RGB(255, 80, 0));
         LLG_setStroke(ctx, LLG_RGB(255, 255, 255));
         LLG_setStrokeWidth(ctx, 2);
-        LLG_circle(ctx, LLG_getWidth(ctx) / 2, LLG_getHeight(ctx) / 2, 80);
-        LLG_setFill(ctx, LLG_RGB(255, 80, 255));
-        LLG_ellipse(ctx, ellipse);
+        LLG_circle(ctx, 400, 300, 80);
 
         LLG_present(ctx);
     }

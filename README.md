@@ -65,7 +65,7 @@ int main(void) {
 
 <div align="center">
 
-![LLG Demo Screenshot](docs/images/demo.png)
+![LLG Demo Screenshot](docs/images/basic_demo.png)
 
 </div>
 

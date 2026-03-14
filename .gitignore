@@ -2,8 +2,10 @@
 *.a
 *.so
 *.out
+*.pc
 
 test_*
+example_*
 
 .vscode/
 .idea/
