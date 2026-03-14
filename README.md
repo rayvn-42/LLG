@@ -164,7 +164,7 @@ make test_event     # event handling — interactive, requires manual input
 
 A passing basic test looks like this:
 
-![Test Output](docs/images/test_output.png)
+![Test Output](docs/images/output.png)
 
 ---
 
